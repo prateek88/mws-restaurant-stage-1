@@ -2,7 +2,12 @@ let restaurants,
   neighborhoods,
   cuisines
 var newMap
-var markers = []
+var markers = [];
+var tabindex = 0;
+
+// Add tabindex to reaturant review heading
+const heading = document.getElementById('heading');
+heading.setAttribute('tabindex', ++tabindex);
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -32,10 +37,12 @@ fetchNeighborhoods = () => {
  */
 fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
+  select.setAttribute('tabindex', ++tabindex);
   neighborhoods.forEach(neighborhood => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
+    option.setAttribute('tabindex', ++tabindex); // add tabindex
     select.append(option);
   });
 }
@@ -59,11 +66,12 @@ fetchCuisines = () => {
  */
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
-
+  select.setAttribute('tabindex', ++tabindex);
   cuisines.forEach(cuisine => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
     option.value = cuisine;
+    option.setAttribute('tabindex', ++tabindex);
     select.append(option);
   });
 }
@@ -164,6 +172,7 @@ createRestaurantHTML = (restaurant) => {
   li.append(image);
 
   const name = document.createElement('h1');
+  name.setAttribute('tabindex', ++tabindex);
   name.innerHTML = restaurant.name;
   li.append(name);
 
@@ -172,10 +181,12 @@ createRestaurantHTML = (restaurant) => {
   li.append(neighborhood);
 
   const address = document.createElement('p');
+  address.setAttribute("tabindex", ++tabindex);
   address.innerHTML = restaurant.address;
   li.append(address);
 
   const more = document.createElement('a');
+  more.setAttribute("tabindex", ++tabindex);
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
